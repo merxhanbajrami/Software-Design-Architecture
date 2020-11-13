@@ -1,0 +1,15 @@
+Pipeline and filter for dataset of cafes in London:
+osmfilter londonmap.osm --keep="amenity=pub" | osmconvert - --all-to-nodes --csv="name addr:city addr:street website opening_hours fhrs:rating" --csv-headline --csv-separator="," -o="data_cafe.csv"
+
+
+Pipeline and filter for dataset of offices in London:
+osmfilter londonmap.osm --keep="office=*" | osmconvert - --all-to-nodes --csv="name addr:street source wheelchair" --csv-headline --csv-separator="," -o="data_office.csv"
+
+Pipeline and filter for dataset of hospitals in London:
+osmfilter londonmap.osm --keep="healthcare=hospital" | osmconvert - --all-to-nodes --csv="name addr:street source" --csv-headline --csv-separator="," -o="data_hospital.csv"
+
+
+Pipeline and filter for dataset of banks in London:
+
+osmfilter londonmap.osm --keep="amenity=bank" | osmconvert - --all-to-nodes --csv="name brand:wikipedia brand:wikidata addr:city addr:street" --csv-headline --csv-separator="," -o="data_bank.csv"
+
