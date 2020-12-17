@@ -92,7 +92,7 @@
 <body>
 <header>
     <div class ="backkopce">
-        <a href="index.html">
+        <a href="{{url_for('index')}}">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
             <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
@@ -111,26 +111,17 @@
             <i class="fas fa-search"></i>
         </a>
     </div>
-    <h2 onclick ="toggle('q1')">Cafeteria number 1</h2>
-    <div id="q1" style="display:none;">
-        <p> Location: ...</p>
-        <p> Rating: ...</p>
-        <p> Distance: ...</p><br>
-
-
-    </div>
-    <h2 onclick="toggle('q2')">Cafeteria number 2</h2>
-    <div id="q2" style="display:none;">
-        <p> Location: ...</p>
-        <p> Rating: ...</p>
-        <p> Distance: ...</p><br>
-    </div>
-    <h2 onclick="toggle('q3')">Cafeteria number 3</h2>
-    <div id="q3" style="display:none;">
-        <p> Location: ...</p>
-        <p> Rating: ...</p>
-        <p> Distance: ...</p><br>
-    </div>
+    {% if data %}
+        {% for item in data %}
+            <h2 onclick="toggle({{ item.ID }})">{{ item.name }}</h2>
+            <div id="{{ item.ID }}" style="display:none;">
+                <p> Location: {{ item['addr:city']}}{{ item['addr:street'] }}</p>
+                <p> Rating: {{ item.review }}</p>
+                <p> Distance: ...</p>
+            <br>
+            </div>
+        {% endfor %}
+    {% endif %}
 </section>
 <aside>
     <div class="mapouter">

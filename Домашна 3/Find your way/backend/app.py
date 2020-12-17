@@ -30,28 +30,28 @@ class Office(db.Model):
 @app.route('/')
 def index():
     results = db.session.query(Office).all()
-    return render_template('homepage.html', data=results)
+    return render_template('index.html', data=results)
 
 
 @app.route('/offices')
 def offices():
     results = db.session.query(Office).all()
-    return render_template('homepage.html', data=results)
+    return render_template('offices.html', data=results)
 
 
 @app.route('/hospitals')
 def hospitals():
     results = db.session.query(Hospital).all()
-    return render_template('homepage.html', data=results)
+    return render_template('hospital.html', data=results)
 
 
 @app.route('/coffees')
 def coffees():
     results = db.session.query(Coffee).all()
-    return render_template('homepage.html', data=results)
+    return render_template('cafe.html', data=results)
 
 
 @app.route('/banks')
 def banks():
     results = db.session.query(Bank).all()
-    return render_template('homepage.html', data=results)
+    return render_template('Banks.html', data=results)
