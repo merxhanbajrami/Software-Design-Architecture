@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        #vlez{
-            font-family: cursive;
-        }
         body{
             margin-top: 20px;
             margin-left: 20px;
@@ -20,6 +17,10 @@
             text-align: left;
             font-family: cursive;
         }
+        #vlez{
+            font-family: cursive;
+        }
+
         section{
             float:left;
             margin: 0 1.5%;
@@ -30,7 +31,14 @@
             margin: 0 1.5%;
             width: 55%;
         }
-
+        #back{
+            background-image: url( 'back-strelka.jpg' );
+            background-size: 30px 30px;
+            height: 30px;
+            width: 30px;
+            box-shadow: navajowhite;
+            border-color: white;
+        }
         h2{
             color: grey;
             text-shadow: 3px 3px 6px navajowhite;
@@ -83,7 +91,6 @@
     </style>
 </head>
 <body>
-
 <header>
     <div class ="backkopce">
         <a href="{{url_for('index')}}">
@@ -93,12 +100,11 @@
             </svg>
         </a>
     </div>
-
 </header>
 
 
 <section>
-    <h1>Banks</h1>
+    <h1>Hospitals</h1>
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <div class="search-box">
         <input id = "vlez" class="search-txt" type="text" name="" placeholder="Type to search">
@@ -106,17 +112,20 @@
             <i class="fas fa-search"></i>
         </a>
     </div>
-    {% if data %}
-        {% for item in data %}
-            <h2 onclick="toggle({{ item.ID }})">{{ item.name }}</h2>
-            <div id="{{ item.ID }}" style="display:none;">
-                <p> Location: {{ item['addr:city']}}{{ item['addr:street'] }}</p>
+      {% if data %}
+            {% for item in data %}
+               <a href="#" style="text-decoration: none"><h2 onclick="toggle({{ item.ID }})">{{ item.name }}</h2></a>
+                <div id="{{ item.ID }}" style="display:none;">
+                <p> Location: {{ item['addr:street'] }}</p>
                 <p> Rating: {{ item.review }}</p>
-                <p> Distance: ...</p>
-            <br>
-            </div>
-        {% endfor %}
-    {% endif %}
+                 <p> Distance: ...</p>
+                    <a href="{{ url_for('hospital',id=item.ID) }}">
+                    <button> Show more</button>
+                </a>
+                <br>
+                </div>
+            {% endfor %}
+        {% endif %}
 </section>
 <aside>
     <div class="mapouter">
@@ -128,23 +137,22 @@
             .mapouter{
                 position:relative;
                 text-align:left;
-                height:1000px;
+                min-height:1000px;
                 width:600px;
             }
             .gmap_canvas {
                 overflow:hidden;
                 background:none!important;
-                height:1000px;
+                min-height:1000px;
                 width:600px;
             }</style>
     </div>
 </aside>
 
 <script>
-    var list=null;
     function toggle(obj) {
         var obj=document.getElementById(obj);
-        if (obj.style.display === "block") obj.style.display = "none";
+        if (obj.style.display == "block") obj.style.display = "none";
         else obj.style.display = "block";
     }
     function ClearField(){
@@ -158,19 +166,6 @@
             document.getElementById("search").click();
         }
     });
-
-
-    const promiseOfSomeData = fetch("").
-         then(r=>r.json())
-        .then(data => {
-        console.log('in async');
-        return data;
-    });
-    window.onload = async () => {
-        let someData = await promiseOfSomeJsonData;
-        console.log("onload");
-        list=somedata;
-    };
 
 </script>
 </body>

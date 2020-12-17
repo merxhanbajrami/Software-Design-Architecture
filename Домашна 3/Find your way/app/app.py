@@ -55,3 +55,44 @@ def coffees():
 def banks():
     results = db.session.query(Bank).all()
     return render_template('Banks.html', data=results)
+
+
+@app.route('/search', methods=['POST'])
+def search():
+    pass
+
+
+@app.route('/banks/<int:id>',methods=['GET','POST'])
+def bank(id):
+    if request.method=='GET':
+        bank = db.session.query(Bank).filter_by(ID=id).first()
+        return render_template('item.html', object=bank, back='banks')
+    else:
+        return "To be implemented"
+
+
+@app.route('/offices/<int:id>',methods=['GET','POST'])
+def office(id):
+    if request.method=='GET':
+        office = db.session.query(Office).filter_by(ID=id).first()
+        return render_template('item.html', object=office, back='offices')
+    else:
+        return "To be implemented"
+
+
+@app.route('/hospitals/<int:id>',methods=['GET','POST'])
+def hospital(id):
+    if request.method=='GET':
+        hospital = db.session.query(Hospital).filter_by(ID=id).first()
+        return render_template('item.html', object=hospital, back='hospitals')
+    else:
+        return "To be implemented"
+
+
+@app.route('/cafes/<int:id>',methods=['GET','POST'])
+def cafe(id):
+    if request.method=='GET':
+        cafe = db.session.query(Coffee).filter_by(ID=id).first()
+        return render_template('item.html', object=cafe, back='coffees')
+    else:
+        return "To be implementd"

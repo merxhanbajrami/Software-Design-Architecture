@@ -111,11 +111,16 @@
 
     {% if data %}
         {% for item in data %}
-            <h2 onclick="toggle({{ item.ID }})">{{ item.name }}</h2>
+           <a href="#" style="text-decoration: none"> <h2 onclick="toggle({{ item.ID }})">{{ item.name }}</h2> </a>
             <div id="{{ item.ID }}" style="display:none;">
                 <p> Location: {{ item['addr:street'] }}</p>
                 <p> Rating: {{ item.review }}</p>
                 <p> Distance: ...</p>
+                <p>{{ item['@lat'] }}</p>
+                <p>{{ item['@lan'] }}</p>
+                 <a href="{{ url_for('office',id=item.ID) }}">
+                    <button> Show more</button>
+                </a>
             <br>
             </div>
         {% endfor %}
