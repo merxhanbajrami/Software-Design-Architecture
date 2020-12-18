@@ -115,8 +115,21 @@
         {% for item in data %}
             <a href="#" style="text-decoration: none"><h2 onclick="toggle({{ item.ID }})">{{ item.name }}</h2></a>
             <div id="{{ item.ID }}" style="display:none;">
-                <p> Location: {{ item['addr:city']}}{{ item['addr:street'] }}</p>
-                <p> Rating: {{ item.review }}</p>
+                <p> Location: <strong>{{ item['addr:city']}}{{ item['addr:street'] }}</strong></p>
+                <p style="display:inline;"> Rating:
+                    {% if item.review <= 5 %}
+                         {% for i in range(0,item.review) %}
+                            <img src="/static/star.png" width="20px" height="20px">
+                          {% endfor %}
+                    {% else %}
+                        {% for i in range(0,4) %}
+                              <img src="/static/star.png" width="20px" height="20px">
+                        {% endfor %}
+                    {% endif %}
+                    {% if item.review == 0 %}
+                              <img src="/static/warning.png" width="20px" height="20px">
+                    {% endif %}
+                </p>
                 <p> Distance: ...</p>
                 <a href="{{ url_for('cafe',id=item.ID) }}">
                     <button> Show more</button>

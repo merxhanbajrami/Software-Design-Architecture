@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, make_response
+from flask import Flask, render_template, jsonify, request, make_response, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.automap import automap_base
 
@@ -62,37 +62,49 @@ def search():
     pass
 
 
-@app.route('/banks/<int:id>',methods=['GET','POST'])
+@app.route('/banks/<int:id>', methods=['GET', 'POST'])
 def bank(id):
-    if request.method=='GET':
-        bank = db.session.query(Bank).filter_by(ID=id).first()
+    bank = db.session.query(Bank).filter_by(ID=id).first()
+    if request.method == 'GET':
         return render_template('item.html', object=bank, back='banks')
     else:
-        return "To be implemented"
+        result = request.form['rating']
+        bank.review = bank.review + int(result)
+        db.session.commit()
+        return render_template('item.html', object=bank, back='banks')
 
 
-@app.route('/offices/<int:id>',methods=['GET','POST'])
+@app.route('/offices/<int:id>', methods=['GET', 'POST'])
 def office(id):
-    if request.method=='GET':
-        office = db.session.query(Office).filter_by(ID=id).first()
+    office = db.session.query(Office).filter_by(ID=id).first()
+    if request.method == 'GET':
         return render_template('item.html', object=office, back='offices')
     else:
-        return "To be implemented"
+        result = request.form['rating']
+        office.review = office.review + int(result)
+        db.session.commit()
+        return render_template('item.html', object=office, back='offices')
 
 
-@app.route('/hospitals/<int:id>',methods=['GET','POST'])
+@app.route('/hospitals/<int:id>', methods=['GET', 'POST'])
 def hospital(id):
-    if request.method=='GET':
-        hospital = db.session.query(Hospital).filter_by(ID=id).first()
+    hospital = db.session.query(Hospital).filter_by(ID=id).first()
+    if request.method == 'GET':
         return render_template('item.html', object=hospital, back='hospitals')
     else:
-        return "To be implemented"
+        result = request.form['rating']
+        hospital.review = hospital.review + int(result)
+        db.session.commit()
+        return render_template('item.html', object=hospital, back='hospitals')
 
 
-@app.route('/cafes/<int:id>',methods=['GET','POST'])
+@app.route('/cafes/<int:id>', methods=['GET', 'POST'])
 def cafe(id):
-    if request.method=='GET':
-        cafe = db.session.query(Coffee).filter_by(ID=id).first()
+    cafe = db.session.query(Coffee).filter_by(ID=id).first()
+    if request.method == 'GET':
         return render_template('item.html', object=cafe, back='coffees')
     else:
-        return "To be implementd"
+        result = request.form['rating']
+        cafe.review = cafe.review + int(result)
+        db.session.commit()
+        return render_template('item.html', object=cafe, back='coffees')

@@ -121,6 +121,22 @@
             border-radius: 30%;
         }
 
+        .tooltip .tooltiptext {
+          visibility: hidden;
+          width: 120px;
+          background-color: rgba(87, 87, 87, 0.62);
+          color: #fff;
+          text-align: center;
+          border-radius: 6px;
+          padding: 5px 0;
+
+          position: absolute;
+          z-index: 1;
+        }
+
+        .tooltip:hover .tooltiptext {
+          visibility: visible;
+        }
     </style>
 
 
@@ -140,17 +156,29 @@
     <button id ="search" onclick="ClearField()">SEARCH</button>-->
     <div class="row">
         <div class="column">
-            <a href= "{{ url_for('banks') }}"><img src="/static/bank.png" id="banka" alt="banka"> </a>
+            <a href= "{{ url_for('banks') }}" class="tooltip">
+                <img src="/static/bank.png" id="banka" alt="banka" >
+                    <span class="tooltiptext">Banks</span>
+            </a>
         </div>
         <div class="column">
-            <a href= "{{ url_for('coffees') }}"><img src="/static/cafe.png" id="kafe" alt="cafe"> </a>
+            <a href= "{{ url_for('coffees') }}" class="tooltip">
+                <img src="/static/cafe.png" id="kafe" alt="cafe">
+                <span class="tooltiptext">Cafes</span>
+            </a>
         </div><br>
 
         <div class="column">
-            <a href= "{{ url_for('hospitals') }}"><img src="/static/hospital.png" id="bolnica" alt="hospital"> </a>
+            <a href= "{{ url_for('hospitals') }}" class="tooltip">
+                <img src="/static/hospital.png" id="bolnica" alt="hospital">
+                <span class="tooltiptext">Hospitals</span>
+            </a>
         </div>
         <div class="column">
-            <a href= "{{ url_for('offices') }}"><img src="/static/office.png" id="office" alt="office"> </a>
+            <a href= "{{ url_for('offices') }}" class="tooltip">
+                <img src="/static/office.png" id="office" alt="office">
+                <span class="tooltiptext">Offices</span>
+            </a>
         </div>
     </div>
 
