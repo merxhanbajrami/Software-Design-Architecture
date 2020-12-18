@@ -57,8 +57,48 @@ def banks():
     return render_template('Banks.html', data=results)
 
 
-@app.route('/search', methods=['POST'])
-def search():
+@app.route('/search/<int:category>', methods=['POST'])
+def search(category):
+    if request.method == 'POST':
+        keyword = request.form['ime']
+        if category == 0:
+            cafes = db.session.query(Coffee).filter_by(name=keyword)
+            hospitals = db.session.query(Hospital).filter_by(name=keyword)
+            banks = db.session.query(Bank).filter_by(name=keyword)
+            offices = db.session.query(Office).filter_by(name=keyword)
+            return render_template('search_results.html', cafes=cafes, hospitals=hospitals, banks=banks,
+                                   offices=offices)
+        elif category == 1:
+            result = db.session.query(Coffee).filter_by(name=keyword)
+            return render_template('search_results.html', data=result)
+        elif category == 2:
+            result = db.session.query(Bank).filter_by(name=keyword)
+            return render_template('search_results.html', data=result)
+        elif category == 3:
+            result = db.session.query(Office).filter_by(name=keyword)
+            return render_template('search_results.html', data=result)
+        elif category == 4:
+            result = db.session.query(Hospital).filter_by(name=keyword)
+            return render_template('search_results.html', data=result)
+
+
+@app.route('/search_banks', methods=['POST'])
+def search_banks():
+    pass
+
+
+@app.route('/search_hospitals', methods=['POST'])
+def search_hospitals():
+    pass
+
+
+@app.route('/search_offices', methods=['POST'])
+def search_offices():
+    pass
+
+
+@app.route('/search_cafes', methods=['POST'])
+def search_cafes():
     pass
 
 

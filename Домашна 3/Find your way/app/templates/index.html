@@ -146,12 +146,14 @@
 <section>
     <header><a href="{{ url_for('index') }}" style="text-decoration: none"><h1>Find your way</h1></a></header>
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-    <div class="search-box">
-        <input id = "vlez" class="search-txt" type="text" name="" placeholder="Type to search">
-        <a id = "search" class="search-btn" href="#" onclick="ClearField()">
-            <i class="fas fa-search"></i>
-        </a>
-    </div>
+    <form action="{{ url_for('search',category=0) }}" method="POST">
+        <div class="search-box">
+            <input id = "vlez" class="search-txt" type="text" name="ime" placeholder="Type to search">
+            <button id = "search" class="search-btn" type="submit" style="border:none;">
+                <i class="fas fa-search"></i>
+            </button>
+         </div>
+    </form>
     <!--<input id ="vlez" placeholder="Search...">
     <button id ="search" onclick="ClearField()">SEARCH</button>-->
     <div class="row">
@@ -208,10 +210,10 @@
 </aside>
 
 <script>
-    function ClearField(){
-        document.getElementById("vlez").value = "";
-        document.getElementById("vlez").placeholder = "Type to search";
-    }
+    //function ClearField(){
+        //document.getElementById("vlez").value = "";
+        //document.getElementById("vlez").placeholder = "Type to search";
+    //}
     var input = document.getElementById("vlez");
     input.addEventListener("keyup", function(event) {
         if (event.keyCode === 13) {
