@@ -82,26 +82,6 @@ def search(category):
             return render_template('search_results.html', data=result)
 
 
-@app.route('/search_banks', methods=['POST'])
-def search_banks():
-    pass
-
-
-@app.route('/search_hospitals', methods=['POST'])
-def search_hospitals():
-    pass
-
-
-@app.route('/search_offices', methods=['POST'])
-def search_offices():
-    pass
-
-
-@app.route('/search_cafes', methods=['POST'])
-def search_cafes():
-    pass
-
-
 @app.route('/banks/<int:id>', methods=['GET', 'POST'])
 def bank(id):
     bank = db.session.query(Bank).filter_by(ID=id).first()
@@ -148,3 +128,6 @@ def cafe(id):
         cafe.review = cafe.review + int(result)
         db.session.commit()
         return render_template('item.html', object=cafe, back='coffees')
+
+    
+    

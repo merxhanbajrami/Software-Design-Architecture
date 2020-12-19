@@ -121,10 +121,20 @@
 <body>
     <script>
         var map;
+        var my_lat;
+        var my_lon;
+
         window.onload=function(){
             map = dispalyMap();
-            findMyLocation();
             
+            map.locate({setView : true});
+            map.on('locationfound', function(e){
+                L.marker(e.latlng).addTo(map);
+                my_lat = e.latitude;
+                my_lon = e.longitude;
+                distanceAndMark();
+            });
+            map.on('locationerror', function(e){alert(e.message)});
             var input = document.getElementById("vlez");
             input.addEventListener("keyup", function(event) {
              if (event.keyCode === 13) {
@@ -132,9 +142,6 @@
                  document.getElementById("search").click();
                 }
             });
-
-            map.on('locationfound',onLocationFound);
-            map.on('locationerror',onLocationError);
 
         };
 
@@ -147,23 +154,48 @@
 
             return mymap;
         }
-
-        function findMyLocation(){
-           var location =  map.locate({setView : true});
-        }
         
-        function onLocationFound(e){
-            L.marker(e.latlng).addTo(map);
-        }
-        
-        function onLocationError(e){
-            alert(e.message);
-        }
 
         function toggle(obj) {
             var obj=document.getElementById(obj);
             if (obj.style.display == "block") obj.style.display = "none";
             else obj.style.display = "block";
+        }
+
+        function distanceAndMark() {
+            '{% for item in data %}'
+
+            var displayElement = document.getElementById('{{ item.ID }}').getElementsByTagName("p")[2];
+
+            var item_lat = '{{ item["@lat"] }}'
+            var item_lon = '{{ item["@lon"] }}'
+
+            var distance = calculateDistance(my_lat,my_lon,item_lat,item_lon);
+            
+            displayElement.innerHTML="Distnace:" + distance;
+            L.marker([item_lat,item_lon]).addTo(map);
+            '{% endfor %}'
+        };
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            if ((lat1 == lat2) && (lon1 == lon2)) {
+                return 0;
+            }
+            else {
+                var radlat1 = Math.PI * lat1 / 180;
+                var radlat2 = Math.PI * lat2 / 180;
+                var theta = lon1 - lon2;
+                var radtheta = Math.PI * theta / 180;
+                var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+                if (dist > 1) {
+                    dist = 1;
+                }
+                dist = Math.acos(dist);
+                dist = dist * 180 / Math.PI;
+                dist = dist * 60 * 1.1515;
+                dist = dist * 1.609344 
+                return dist;
+            }
         }
     </script>
 

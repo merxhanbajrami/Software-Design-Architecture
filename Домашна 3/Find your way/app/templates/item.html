@@ -6,6 +6,15 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+     <!-- leaflet javascript and css files -->
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+     crossorigin=""/>
+  
+     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+     crossorigin=""></script>
     <style>
          .animated {
             -webkit-transition: height 0.2s;
@@ -23,8 +32,43 @@
             margin-left:20px;
             margin-top:30px;
         }
+
+        #mapid {
+            width: 1000px;
+            height: 500px;
+            border-radius: 50px;
+            margin-left: 170px;
+        }
+
+        /* The css code for zoom buttons on the map */
+        .leaflet-control-zoom-in {
+            font: bold 18px 'Lucida Console', Monaco, monospace;
+            text-indent: 1px;
+            
+        }
+
+        .leaflet-control-zoom-out {
+            font: bold 18px 'Lucida Console', Monaco, monospace;
+            text-indent: 1px;
+           
+        }
     </style>
 <body>
+    <script>
+        window.onload = function(){
+
+            var ob_lat = '{{ object["@lat"] }}';
+            var ob_lon = '{{ object["@lon"] }}';
+
+            var map = L.map('mapid').setView([ob_lat, ob_lon], 15);
+
+            L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=6F9yLFKNMLDBrR4LD4Pt', {
+            attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+            }).addTo(map);
+
+            L.marker([ob_lat,ob_lon]).addTo(map);
+        }
+    </script>
        <div class="row">
            <div class="col-lg-2 ">
              <div class ="backkopce">
@@ -73,10 +117,11 @@
 	                    </div>
                    </div>
                </div>
-               <div class="row">
+               <div id="mapid"></div>
+               <!-- <div class="row">
                    <div class="col-12">
                        <iframe style="border-radius: 5%;" width="100%" height="1000" id="gmap_canvas" src="https://maps.google.com/maps?q=university%20of%20san%20francisco&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
-               </div>
+               </div> -->
            </div>
        </div>
 

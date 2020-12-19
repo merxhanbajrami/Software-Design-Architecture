@@ -173,11 +173,10 @@
     <script>
         //Globalna promenliva
         var map;
-
         window.onload=function(){
     
             map = dispalyMap();
-
+    
             var input = document.getElementById("vlez");
             input.addEventListener("keyup", function(event) {
             
@@ -201,10 +200,6 @@
             return mymap;
         }
 
-        function findMyLocation(){
-           var location =  map.locate({setView : true});
-        }
-        
         function onLocationFound(e){
             L.marker(e.latlng).addTo(map);
         }
@@ -212,11 +207,11 @@
         function onLocationError(e){
             alert(e.message);
         }
-       
-        // function ClearField() {
-        //     document.getElementById("vlez").value = "";
-        //     document.getElementById("vlez").placeholder = "Type to search";
-        //}
+
+        function findMyLocation(){
+           var location =  map.locate({setView : true});
+        }
+        
     </script>
 
 <section>
