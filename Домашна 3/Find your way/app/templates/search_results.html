@@ -174,11 +174,43 @@
 
         function mark() {
             '{% for item in data %}'
-
+                
             var item_lat = '{{ item["@lat"] }}'
             var item_lon = '{{ item["@lon"] }}'
             L.marker([item_lat, item_lon]).addTo(map);
             '{% endfor %}'
+
+            '{% if cafes %}'    
+                '{% for item in cafes %}'
+                    var item_lat = '{{ item["@lat"] }}'
+                    var item_lon = '{{ item["@lon"] }}'
+                    L.marker([item_lat, item_lon]).addTo(map);
+                '{% endfor %}'
+            '{% endif%}'
+            
+            '{% if hospitals %}'    
+                '{% for item in hospitals %}'
+                    var item_lat = '{{ item["@lat"] }}'
+                    var item_lon = '{{ item["@lon"] }}'
+                    L.marker([item_lat, item_lon]).addTo(map);
+                '{% endfor %}'
+            '{% endif%}'
+
+            '{% if banks %}'    
+                '{% for item in banks %}'
+                    var item_lat = '{{ item["@lat"] }}'
+                    var item_lon = '{{ item["@lon"] }}'
+                    L.marker([item_lat, item_lon]).addTo(map);
+                '{% endfor %}'
+            '{% endif%}'
+
+            '{% if offices %}'    
+                '{% for item in offices %}'
+                    var item_lat = '{{ item["@lat"] }}'
+                    var item_lon = '{{ item["@lon"] }}'
+                    L.marker([item_lat, item_lon]).addTo(map);
+                '{% endfor %}'
+            '{% endif%}'
         };
     </script>
 
