@@ -185,7 +185,7 @@
 
             var distance = calculateDistance(my_lat,my_lon,item_lat,item_lon);
             
-            displayElement.innerHTML="Distnace:" + distance;
+            displayElement.innerHTML="Distance:" + distance.toFixed(2) + " km";
             L.marker([item_lat,item_lon]).addTo(map);
             '{% endfor %}'
         };
