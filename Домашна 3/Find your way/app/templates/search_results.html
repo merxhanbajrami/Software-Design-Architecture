@@ -6,6 +6,17 @@
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
          <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
          <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+          <!-- leaflet javascript and css files -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+ 
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+
     <style>
         #vlez{
             font-family: cursive;
@@ -83,7 +94,7 @@
             width: 140px;
             border-radius: 30%;
         }
-        {box-sizing: border-box;}
+        /* {box-sizing: border-box;} */
         span.stars, span.stars span {
                 display: block;
                 background: url("/static/cafe.png") 0 -12px repeat-x;
@@ -93,9 +104,83 @@
             span.stars span {
                 background-position: 0 0;
             }
+
+
+
+            #mapid {
+            width: 700px;
+            height: 1000px;
+            border-radius: 50px;
+        }
+
+        /* The css code for zoom buttons on the map */
+        .leaflet-control-zoom-in {
+            font: bold 18px 'Lucida Console', Monaco, monospace;
+            text-indent: 1px;
+            
+        }
+
+        .leaflet-control-zoom-out {
+            font: bold 18px 'Lucida Console', Monaco, monospace;
+            text-indent: 1px;
+           
+        }
     </style>
 </head>
 <body>
+    <script>
+        var map;
+        window.onload=function(){
+    
+            map = dispalyMap();
+
+            findMyLocation();
+
+            map.on('locationfound',onLocationFound);
+            map.on('locationerror',onLocationError);
+
+            mark();
+        };
+        
+        function dispalyMap(){
+            var mymap = L.map('mapid').setView([40.7128, 74.0060], 10);
+
+            L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=6F9yLFKNMLDBrR4LD4Pt', {
+            attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+            }).addTo(mymap);
+
+            return mymap;
+        }
+
+        function onLocationFound(e){
+            var LeafIcon = L.Icon.extend({
+            options: {
+             iconSize:     [30, 30],
+                }
+            });
+            var greenIcon = new LeafIcon({
+                iconUrl: '../static/redMarker2.png',
+            });
+            L.marker([e.latitude, e.longitude],{icon:greenIcon}).addTo(map);
+        }
+        
+        function onLocationError(e){
+            alert(e.message);
+        }
+
+        function findMyLocation(){
+           var location =  map.locate({setView : true});
+        }
+
+        function mark() {
+            '{% for item in data %}'
+
+            var item_lat = '{{ item["@lat"] }}'
+            var item_lon = '{{ item["@lon"] }}'
+            L.marker([item_lat, item_lon]).addTo(map);
+            '{% endfor %}'
+        };
+    </script>
 
 <header>
     <div class ="backkopce">
@@ -262,7 +347,8 @@
     {% endif %}
 </section>
 <aside>
-    <div class="mapouter">
+    <div id="mapid"></div>
+    <!-- <div class="mapouter">
         <div class="gmap_canvas">
             <iframe width="1000" height="1000" id="gmap_canvas" src="https://maps.google.com/maps?q=university%20of%20san%20francisco&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
             <a href="https://sites.google.com/view/maps-api-v2/mapv2"></a>
@@ -281,7 +367,7 @@
                 width:600px;
             }
         </style>
-    </div>
+    </div> -->
 </aside>
 
 <script>

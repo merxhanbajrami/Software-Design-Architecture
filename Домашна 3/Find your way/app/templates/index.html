@@ -201,7 +201,15 @@
         }
 
         function onLocationFound(e){
-            L.marker(e.latlng).addTo(map);
+            var LeafIcon = L.Icon.extend({
+            options: {
+             iconSize:[30, 30],
+                }
+            });
+            var greenIcon = new LeafIcon({
+                iconUrl: '../static/redMarker2.png',
+            });
+            L.marker([e.latitude, e.longitude],{icon:greenIcon}).addTo(map);
         }
         
         function onLocationError(e){

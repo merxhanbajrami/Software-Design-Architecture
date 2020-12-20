@@ -140,7 +140,16 @@
 
             map.locate({ setView: true });
             map.on("locationfound", function (e) {
-                L.marker(e.latlng).addTo(map);
+                var LeafIcon = L.Icon.extend({
+                    options: {
+                        iconSize: [30, 30],
+                       
+                    }
+                });
+                var greenIcon = new LeafIcon({
+                    iconUrl: '../static/redMarker2.png',
+                });
+                L.marker([e.latitude, e.longitude], { icon: greenIcon }).addTo(map);
                 my_lat = e.latitude;
                 my_lon = e.longitude;
                 distanceAndMark();
@@ -183,10 +192,10 @@
             var item_lat = '{{ item["@lat"] }}'
             var item_lon = '{{ item["@lon"] }}'
 
-            var distance = calculateDistance(my_lat,my_lon,item_lat,item_lon);
-            
-            displayElement.innerHTML="Distnace:" + distance;
-            L.marker([item_lat,item_lon]).addTo(map);
+            var distance = calculateDistance(my_lat, my_lon, item_lat, item_lon);
+
+            displayElement.innerHTML = "Distnace:" + distance;
+            L.marker([item_lat, item_lon]).addTo(map);
             '{% endfor %}'
         };
 
@@ -206,7 +215,7 @@
                 dist = Math.acos(dist);
                 dist = dist * 180 / Math.PI;
                 dist = dist * 60 * 1.1515;
-                dist = dist * 1.609344 
+                dist = dist * 1.609344
                 return dist;
             }
         }
