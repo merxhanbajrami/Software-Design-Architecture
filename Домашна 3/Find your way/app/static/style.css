@@ -1,0 +1,171 @@
+
+body{
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+h1 {
+    font-size: 40px;
+    color: grey;
+    text-shadow: 3px 3px 6px navajowhite;
+    text-align: left;
+    font-family: cursive;
+}
+
+.findMyLocationButton{
+    width: 200px;
+    height: 45px;
+    font-size: medium;
+    font-family: Fantasy;
+    color: #262626;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 10px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.findMyLocationButton:hover{
+    background-color: rgba(136, 128, 128, 0.534);
+}
+
+#vlez{
+    font-family: cursive;
+    color: rgba(87, 87, 87, 0.62);
+}
+#search {
+    text-shadow: 3px 3px 6px navajowhite;
+}
+section{
+    float: left;
+    margin: 0 1.5%;
+    width: 21%;
+}
+aside{
+    float:right;
+    margin: 0 1.5%;
+    width: 55%;
+}
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+    content: "";
+    clear: both;
+    width: 30%;
+    display: table;
+}
+.row{
+    margin-top: 40px;
+}
+#banka{
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 20%;
+    height: 130px;
+    width: 100px;
+    box-shadow: 0 0 15px rgba(0,0,0,.5);
+}
+#kafe {
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 20%;
+    height: 130px;
+    width: 100px;
+    box-shadow: 0 0 15px rgba(0,0,0,.5);
+}
+#bolnica {
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 20%;
+    height: 130px;
+    width: 100px;
+    box-shadow: 0 0 15px rgba(0,0,0,.5);
+}
+#office {
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 20%;
+    height: 130px;
+    width: 100px;
+    box-shadow: 0 0 15px rgba(0,0,0,.5);
+}
+#gmap_canvas{
+    border-radius: 9%;
+}
+.search-box{
+    /*nav-left: initial;*/
+    top: 50%;
+    left: 50%;
+    height: 25px;
+    border-radius: 40px;
+    background: rgba(197, 186, 172, 0.25);
+    padding: 5px;
+    box-shadow: 0 0 20px rgba(0,0,0,.5);
+    width: 230px;
+}
+.search-btn{
+    color: rgba(87, 87, 87, 0.62);
+    float: left;
+    width: 40px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search-txt{
+    border: none;
+    background: none;
+    outline: none;
+    float: bottom;
+    padding: 0;
+    color:rgba(87, 87, 87, 0.62);
+    /*color: rgba(128, 128, 128, 0.62);*/
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 25px;
+    width: 0px;
+}
+.search-box:hover > .search-txt{
+    width: 160px;
+    border-radius: 30%;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: rgba(87, 87, 87, 0.62);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+#mapid {
+    margin-top: 50px;
+    width: 700px;
+    height: 500px;
+    border-radius: 30px;
+}
+
+/* The css code for zoom buttons on the map */
+.leaflet-control-zoom-in {
+    font: bold 18px 'Lucida Console', Monaco, monospace;
+    text-indent: 1px;
+    
+}
+
+.leaflet-control-zoom-out {
+    font: bold 18px 'Lucida Console', Monaco, monospace;
+    text-indent: 1px;
+    
+}
