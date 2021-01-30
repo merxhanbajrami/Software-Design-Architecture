@@ -1,4 +1,3 @@
-
 body{
     margin-top: 20px;
     margin-left: 20px;
@@ -11,6 +10,17 @@ h1 {
     text-shadow: 3px 3px 6px navajowhite;
     text-align: left;
     font-family: cursive;
+}
+
+h2 {
+    color: grey;
+    text-shadow: 3px 3px 6px navajowhite;
+    text-align: left;
+    font-family: Garamond, cursive;
+}
+
+p {
+    color: rgba(0, 0, 0, 0.71);
 }
 
 .findMyLocationButton{
@@ -91,11 +101,20 @@ aside{
     width: 100px;
     box-shadow: 0 0 15px rgba(0,0,0,.5);
 }
+
+#back {
+    background-image: url('back-strelka.jpg');
+    background-size: 30px 30px;
+    height: 30px;
+    width: 30px;
+    box-shadow: navajowhite;
+    border-color: white;
+}
+
 #gmap_canvas{
-    border-radius: 9%;
+    border-radius: 10%;
 }
 .search-box{
-    /*nav-left: initial;*/
     top: 50%;
     left: 50%;
     height: 25px;
@@ -150,8 +169,22 @@ aside{
     visibility: visible;
 }
 
+
+span.stars,
+span.stars span {
+    display: block;
+    background: url("/static/cafe.png") 0 -12px repeat-x;
+    width: 80px;
+    height: 16px;
+}
+
+span.stars span {
+    background-position: 0 0;
+}
+
+
 #mapid {
-    margin-top: 50px;
+    margin-top: 40px;
     width: 700px;
     height: 500px;
     border-radius: 30px;
