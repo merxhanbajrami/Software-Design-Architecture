@@ -59,6 +59,7 @@ def banks():
 
 @app.route('/search/<int:category>', methods=['POST'])
 def search(category):
+    category.title()
     if request.method == 'POST':
         keyword = request.form['ime']
         if category == 0:
